@@ -1,6 +1,7 @@
-#include <iostream>
-
+#include "MaterialBibliografico.cpp"
+#include "libro.cpp"
 
 int main(){
-    std::cout<<" WENA CABRO LES PRESENTO MI TALLER LOL!"<<std::endl;
+    libro* material = new libro("Principito","pepe","Vision",true, "10 de Octubre");
+    material->~libro();
 };
