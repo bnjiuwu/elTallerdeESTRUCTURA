@@ -10,7 +10,7 @@ MaterialBibliografico::MaterialBibliografico(string Nombre, string Autor, string
 
 MaterialBibliografico::~MaterialBibliografico()
 {
-    std::cout<<"Se ha eliminado "<<std::endl;
+    std::cout<<"Se ha eliminado la clase padre"<<std::endl;
 }
 
 string MaterialBibliografico::getNombre()
