@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "MaterialBibliografico.h"
 
 using namespace std;
 
