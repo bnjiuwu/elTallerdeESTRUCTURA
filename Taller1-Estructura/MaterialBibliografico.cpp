@@ -35,3 +35,4 @@ int MaterialBibliografico::Mostrarinfo()
     cout<<"Estado del Libro: "<<estado<<std::endl;
     return 0;
 }
+
