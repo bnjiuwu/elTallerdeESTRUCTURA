@@ -15,6 +15,7 @@ class MaterialBibliografico
     public:
     MaterialBibliografico(string Nombre,string Autor, string ISBN, string Presstado);
     ~MaterialBibliografico();
-    string getNombre();
+    void setEstado(string Estado);
+    string getEstado();
     virtual int Mostrarinfo();
 };
