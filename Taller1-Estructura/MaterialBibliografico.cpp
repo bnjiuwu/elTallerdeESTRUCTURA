@@ -25,10 +25,10 @@ string MaterialBibliografico::getEstado()
 
 void MaterialBibliografico::Mostrarinfo()
 {
-    cout<<"Nombre del Libro: "<<this->Nombre<<std::endl;
-    cout<<"Autor del Libro: "<<this-> Autor<<std::endl;
-    cout<<"ISBN del Libro: "<<this->ISBN<<std::endl;
-    cout<<"Estado del Libro: "<<this->Prestado<<std::endl;
-    return;
+    cout<<"Nombre del Libro: "<<this->Nombre<<", ";
+    cout<<"Autor del Libro: "<<this-> Autor<<", ";
+    cout<<"ISBN del Libro: "<<this->ISBN<<", ";
+    cout<<"Estado del Libro: "<<this->Prestado<<".";
+    cout<<" "<<std::endl;
 }
 
