@@ -2,7 +2,8 @@
 #include "MaterialBibliografico.cpp"
 #include <iostream>
 
-revista:: revista(string Nombre,string Autor, string ISBN, bool Presstado,int numeroEdicion, string mesPublicacion){
+revista:: revista(string Nombre,string Autor, string ISBN, bool Presstado,int numeroEdicion, string mesPublicacion):MaterialBibliografico(Nombre, Autor, ISBN, Prestado)
+{
     this -> numeroEdicion = numeroEdicion;
     this -> mesPublicacion = mesPublicacion;
 };

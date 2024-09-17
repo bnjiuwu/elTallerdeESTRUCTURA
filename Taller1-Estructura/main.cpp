@@ -1,6 +1,7 @@
 #include "MaterialBibliografico.cpp"
 #include <iostream>
 #include <string>
+#include <fstream>
 
 
 int printmenu(){
@@ -28,6 +29,7 @@ int printmenu(){
 
 void funcion_opcion_1(){
     /*
+
         ESCRIBIR LO QUE HACE LA FUNCION 1
     */
 };

@@ -10,10 +10,10 @@ class MaterialBibliografico
     string Nombre;
     string Autor;
     string ISBN;
-    bool Prestado;
+    string Prestado;
 
     public:
-    MaterialBibliografico(string Nombre,string Autor, string ISBN, bool Presstado);
+    MaterialBibliografico(string Nombre,string Autor, string ISBN, string Presstado);
     ~MaterialBibliografico();
     string getNombre();
     virtual int Mostrarinfo();

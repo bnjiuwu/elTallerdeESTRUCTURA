@@ -1,6 +1,6 @@
 #include "MaterialBibliografico.h"
 
-MaterialBibliografico::MaterialBibliografico(string Nombre, string Autor, string ISBN, bool Prestado)
+MaterialBibliografico::MaterialBibliografico(string Nombre, string Autor, string ISBN, string Prestado)
 {
     this ->Nombre = Nombre;
     this ->Autor = Autor;
@@ -23,16 +23,7 @@ int MaterialBibliografico::Mostrarinfo()
     cout<<"Nombre del Libro: "<<this->Nombre<<std::endl;
     cout<<"Autor del Libro: "<<this-> Autor<<std::endl;
     cout<<"ISBN del Libro: "<<this->ISBN<<std::endl;
-    string estado = "";
-    if(this->Prestado == true)
-    {
-        estado = "Prestado";
-    }
-    else
-    {
-        estado = "No Prestado";
-    }
-    cout<<"Estado del Libro: "<<estado<<std::endl;
+    cout<<"Estado del Libro: "<<this->Prestado<<std::endl;
     return 0;
 }
 
