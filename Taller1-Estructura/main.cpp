@@ -34,10 +34,8 @@ void funcion_opcion_1(){
     */
 };
 
-void funcion_opcion_2(){
-    /*
-        ESCRIBIR LO QUE HACE LA FUNCION 2
-    */
+void funcion_opcion_2(Usuario* usuario, MaterialBibliografico* material){
+   usuario->mostrarMaterialesPrestados();
 };
 
 void funcion_opcion_3(){
@@ -68,8 +66,9 @@ void Menu()
             std::cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
             break;
         case 2:
-            funcion_opcion_2();
-            std::cout<<"NIGGA U STUPID 2"<< std::endl;
+            cout<<"====================" <<std::endl;
+            cout<<"Lista de Materiales Bibliograficos:"<<std::endl;
+            funcion_opcion_2(usuario,material);
             break;
         case 3:
             funcion_opcion_3();
