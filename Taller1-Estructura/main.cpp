@@ -18,6 +18,24 @@ void printmenu(){
     cout<<"3) Lista de invetario"<< std::endl;
 };
 
+void funcion_opcion_1(){
+    /*
+        ESCRIBIR LO QUE HACE LA FUNCION 1
+    */
+};
+
+void funcion_opcion_2(){
+    /*
+        ESCRIBIR LO QUE HACE LA FUNCION 2
+    */
+};
+
+void funcion_opcion_3(){
+    /*
+        ESCRIBIR LO QUE HACE LA FUNCION 3
+    */
+};
+
 void Menu()
 {
     printmenu();
@@ -29,6 +47,7 @@ void Menu()
     switch(opcionMenu)
     {
         case 1:
+<<<<<<< Updated upstream
             cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
             break;
         case 2:
@@ -36,6 +55,18 @@ void Menu()
             break;
         case 3:
             cout<<"OPCION 3 MI LOCO"<< std::endl;
+=======
+            funcion_opcion_1();
+            std::cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
+            break;
+        case 2:
+            funcion_opcion_2();
+            std::cout<<"NIGGA U STUPID 2"<< std::endl;
+            break;
+        case 3:
+            funcion_opcion_3();
+            std::cout<<"OPCION 3 MI LOCO"<< std::endl;
+>>>>>>> Stashed changes
             break;
 
         default:
@@ -44,9 +75,8 @@ void Menu()
         cin>> opcionMenu; 
             break;    
     }
-
-
 };
+
 
 
 

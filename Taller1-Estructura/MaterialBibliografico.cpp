@@ -1,6 +1,6 @@
 #include "MaterialBibliografico.h"
 
-MaterialBibliografico::MaterialBibliografico(string Nombre, string Autor, string ISBN, bool Presstado)
+MaterialBibliografico::MaterialBibliografico(string Nombre, string Autor, string ISBN, bool Prestado)
 {
     this ->Nombre = Nombre;
     this ->Autor = Autor;
