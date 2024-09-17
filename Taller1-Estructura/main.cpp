@@ -19,6 +19,7 @@ int printmenu(){
     cout<<"3) Lista de invetario"<< std::endl;
     cout<<"4) Prestar libros"<< std::endl;
     cout<<"5) Gestion de Usuarios"<< std::endl;
+    cout<<"Salir"<<std::endl;
     int opcionMenu;
 
     cout<<"Ingrese opcion: ";
@@ -54,7 +55,8 @@ void funcion_opcion_5(){
 
 void Menu()
 {
-    while(true)
+    bool niger = true;
+    while(niger)
     {
         int opcionMenu = printmenu();
         switch(opcionMenu)
@@ -73,14 +75,18 @@ void Menu()
                 std::cout<<"OPCION 3 MI LOCO"<< std::endl;
                 break;
             case 4:
-                funcion_opcion_4();
+                funcion_opcion_4(usuario,material);
                 std::cout<<"OPCION 4 MI LOCO"<< std::endl;
                 break;
             case 5:
                 funcion_opcion_5();
                 std::cout<<"OPCION 5 MI LOCO"<< std::endl;
                 break;
-    
+
+            case 6:
+                niger = false;
+                break;
+
             default:
                 cout<<"Ingrese opcion valida: "; 
                 cin>> opcionMenu; 
