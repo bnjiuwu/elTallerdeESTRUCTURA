@@ -43,10 +43,8 @@ void funcion_opcion_3(){
         ESCRIBIR LO QUE HACE LA FUNCION 3
     */
 };
-void funcion_opcion_4(){
-    /*
-        ESCRIBIR LO QUE HACE LA FUNCION 4
-    */
+void funcion_opcion_4(Usuario* usuario, MaterialBibliografico* material){
+    usuario->prestarMaterial(material);
 };
 void funcion_opcion_5(){
     /*
@@ -56,37 +54,38 @@ void funcion_opcion_5(){
 
 void Menu()
 {
-    
-    int opcionMenu = printmenu();
-
-    switch(opcionMenu)
+    while(true)
     {
-        case 1:
-            funcion_opcion_1();
-            std::cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
-            break;
-        case 2:
-            cout<<"====================" <<std::endl;
-            cout<<"Lista de Materiales Bibliograficos:"<<std::endl;
-            funcion_opcion_2(usuario,material);
-            break;
-        case 3:
-            funcion_opcion_3();
-            std::cout<<"OPCION 3 MI LOCO"<< std::endl;
-            break;
-        case 4:
-            funcion_opcion_4();
-            std::cout<<"OPCION 4 MI LOCO"<< std::endl;
-            break;
-        case 5:
-            funcion_opcion_5();
-            std::cout<<"OPCION 5 MI LOCO"<< std::endl;
-            break;
-
-        default:
-            cout<<"Ingrese opcion valida: "; 
-            cin>> opcionMenu; 
-            break;    
+        int opcionMenu = printmenu();
+        switch(opcionMenu)
+        {
+            case 1:
+                funcion_opcion_1();
+                std::cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
+                break;
+            case 2:
+                cout<<"====================" <<std::endl;
+                cout<<"Lista de Materiales Bibliograficos:"<<std::endl;
+                funcion_opcion_2(usuario,material);
+                break;
+            case 3:
+                funcion_opcion_3();
+                std::cout<<"OPCION 3 MI LOCO"<< std::endl;
+                break;
+            case 4:
+                funcion_opcion_4();
+                std::cout<<"OPCION 4 MI LOCO"<< std::endl;
+                break;
+            case 5:
+                funcion_opcion_5();
+                std::cout<<"OPCION 5 MI LOCO"<< std::endl;
+                break;
+    
+            default:
+                cout<<"Ingrese opcion valida: "; 
+                cin>> opcionMenu; 
+                break;    
+        }
     }
 };
 
