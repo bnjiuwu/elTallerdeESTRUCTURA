@@ -1,9 +1,9 @@
-#include "libro.cpp"
+#include "MaterialBibliografico.cpp"
 #include <iostream>
 #include <string>
 
 
-void printmenu(){
+int printmenu(){
     int repetirChar = 20;
     char g = '=';
     int num_esp = 7;
@@ -13,9 +13,17 @@ void printmenu(){
     string textoMenu = "MENU";
     cout<<std::string(num_esp, ' ') << textoMenu <<std::endl;
     cout<< std::string(repetirChar,g)<<std::endl;
-    cout<<"1) Agregar libros"<< std::endl;
-    cout<<"2) Prestar libros"<< std::endl;
+    cout<<"1) Agregar Material a la Biblioteca"<< std::endl;
+    cout<<"2) Mostrar Informacion de los Materiales"<< std::endl;
     cout<<"3) Lista de invetario"<< std::endl;
+    cout<<"4) Prestar libros"<< std::endl;
+    cout<<"5) Gestion de Usuarios"<< std::endl;
+    int opcionMenu;
+
+    cout<<"Ingrese opcion: ";
+    cin>> opcionMenu;
+
+    return opcionMenu;
 };
 
 void funcion_opcion_1(){
@@ -35,27 +43,25 @@ void funcion_opcion_3(){
         ESCRIBIR LO QUE HACE LA FUNCION 3
     */
 };
+void funcion_opcion_4(){
+    /*
+        ESCRIBIR LO QUE HACE LA FUNCION 4
+    */
+};
+void funcion_opcion_5(){
+    /*
+        ESCRIBIR LO QUE HACE LA FUNCION 4
+    */
+};
 
 void Menu()
 {
-    printmenu();
-    int opcionMenu;
-
-    cout<<"Ingrese opcion: ";
-    cin>> opcionMenu;
+    
+    int opcionMenu = printmenu();
 
     switch(opcionMenu)
     {
         case 1:
-<<<<<<< Updated upstream
-            cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
-            break;
-        case 2:
-            cout<<"NIGGA U STUPID 2"<< std::endl;
-            break;
-        case 3:
-            cout<<"OPCION 3 MI LOCO"<< std::endl;
-=======
             funcion_opcion_1();
             std::cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
             break;
@@ -66,19 +72,22 @@ void Menu()
         case 3:
             funcion_opcion_3();
             std::cout<<"OPCION 3 MI LOCO"<< std::endl;
->>>>>>> Stashed changes
+            break;
+        case 4:
+            funcion_opcion_4();
+            std::cout<<"OPCION 4 MI LOCO"<< std::endl;
+            break;
+        case 5:
+            funcion_opcion_5();
+            std::cout<<"OPCION 5 MI LOCO"<< std::endl;
             break;
 
         default:
-        cout<<"Ingrese opcion valida: "; 
-        
-        cin>> opcionMenu; 
+            cout<<"Ingrese opcion valida: "; 
+            cin>> opcionMenu; 
             break;    
     }
 };
-
-
-
 
 
 int main(){

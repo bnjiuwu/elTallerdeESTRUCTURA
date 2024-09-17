@@ -34,4 +34,5 @@ void Usuario::mostrarMaterialesPrestados()
 
 Usuario::~Usuario()
 {
+    cout<<"Se ha eliminado el usuario: "<< this-> Nombre<<std::endl;
 }
