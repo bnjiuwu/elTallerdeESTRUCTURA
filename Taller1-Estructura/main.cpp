@@ -91,7 +91,7 @@ MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliogr
 };
 
 void funcion_opcion_4(MaterialBibliografico** ListaMateriales){
-   MaterialBibliografico* Material;
+    MaterialBibliografico* Material;
     int aux = 0;
     int opcionfuncion;
     cout<<" "<<std::endl;
@@ -185,7 +185,10 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales){
             cin>> opcionfuncion; 
             break;
 
+
+    }
 };
+
 void funcion_opcion_5(){
     /*
         ESCRIBIR LO QUE HACE LA FUNCION 4
