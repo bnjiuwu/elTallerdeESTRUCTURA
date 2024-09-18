@@ -18,6 +18,11 @@ void MaterialBibliografico::setEstado(string Estado)
     this->Prestado = Estado;
 }
 
+string MaterialBibliografico::getNombre()
+{
+    return this->Nombre;
+}
+
 string MaterialBibliografico::getEstado()
 {
     return this->Prestado;
