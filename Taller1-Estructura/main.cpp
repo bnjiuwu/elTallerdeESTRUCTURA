@@ -65,7 +65,33 @@ void funcion_opcion_3(){
     cout<<"Ingresa Opcion: "<<std::endl;
     cin>>opcionfuncion;
 };
+
+
+MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliografico** ListaMateriales, int aux)
+{
+    cout<<"---------------"<<std::endl;
+    cout<<"Introduce el Nombre: "<<std::endl;
+    cin>>nombreMaterial;
+    while(aux<100)
+    {
+        if(ListaMateriales[aux] != nullptr)
+        {
+            if(nombreMaterial == ListaMateriales[aux]->getNombre())
+            {
+                return ListaMateriales[aux];
+            }
+        }
+        if(ListaMateriales[aux] == nullptr)
+        {
+            break;
+        }
+        aux++;
+    }
+    return nullptr;
+};
+
 void funcion_opcion_4(MaterialBibliografico** ListaMateriales){
+   MaterialBibliografico* Material;
     int aux = 0;
     int opcionfuncion;
     cout<<" "<<std::endl;
@@ -82,52 +108,83 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales){
     switch(opcionfuncion)
     {
         case 1:
-            cout<<"---------------"<<std::endl;
-            cout<<"Introduce el Nombre: "<<std::endl;
-            cin>>nombreMaterial;
-            while(aux<100)
+            Material = EncontrarMaterial(nombreMaterial,ListaMateriales,aux);
+            if(Material != nullptr)
             {
-                if(ListaMateriales[aux] != nullptr)
-                {
-                    if(nombreMaterial == ListaMateriales[aux]->getNombre())
-                    {
-                        if(ListaMateriales[aux]->getEstado() == "No Prestado")
-                        {
-                            cout<<" "<<std::endl;
-                            cout<<"================="<<std::endl;
-                            cout<<" "<<std::endl;
-                            cout<<"Se ha realizado el prestamo del material"<<std::endl;
-                            ListaMateriales[aux]->setEstado("Prestado");
-                            funcion_opcion_4(ListaMateriales);
-                            break;
-                        }
-                        else
-                        {
-                            cout<<" "<<std::endl;
-                            cout<<"================="<<std::endl;
-                            cout<<" "<<std::endl;
-                            cout<<"El material ya se encuentra prestado"<<std::endl;
-                            funcion_opcion_4(ListaMateriales);
-                            break;
-                        }
-                    }
-                }
-                if(ListaMateriales[aux] == nullptr)
+                if(Material->getEstado() == "No Prestado")
                 {
                     cout<<" "<<std::endl;
                     cout<<"================="<<std::endl;
-                    cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    cout<<" "<<std::endl;
+                    cout<<"Se ha realizado el prestamo del material"<<std::endl;
+                    Material->setEstado("Prestado");
                     funcion_opcion_4(ListaMateriales);
-                    break;
+                    
                 }
-                aux++;
+                else
+                {
+                    cout<<" "<<std::endl;
+                    cout<<"================="<<std::endl;
+                    cout<<" "<<std::endl;
+                    cout<<"El material ya se encuentra prestado"<<std::endl;
+                    funcion_opcion_4(ListaMateriales);
+                }
+                    
             }
-            cout<<" "<<std::endl;
-            cout<<"================="<<std::endl;
-            cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
-            funcion_opcion_4(ListaMateriales);
+            if(Material == nullptr)
+            {
+                cout<<" "<<std::endl;
+                cout<<"================="<<std::endl;
+                cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                funcion_opcion_4(ListaMateriales);
+            
+            }   
             break;
-    }
+        
+
+        case 2:
+            Material = EncontrarMaterial(nombreMaterial,ListaMateriales,aux);
+            if(Material != nullptr)
+            {
+                if(Material->getEstado() == "No Prestado")
+                {
+                    cout<<" "<<std::endl;
+                    cout<<"================="<<std::endl;
+                    cout<<" "<<std::endl;
+                    cout<<"El material no ha sido prestado"<<std::endl;
+                    funcion_opcion_4(ListaMateriales);
+                    
+                }
+                else
+                {
+                    cout<<" "<<std::endl;
+                    cout<<"================="<<std::endl;
+                    cout<<" "<<std::endl;
+                    cout<<"Se ha realizado la devolucion"<<std::endl;
+                    Material->setEstado("No Prestado");
+                    funcion_opcion_4(ListaMateriales);
+                }
+                    
+            }
+            if(Material == nullptr)
+            {
+                cout<<" "<<std::endl;
+                cout<<"================="<<std::endl;
+                cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                funcion_opcion_4(ListaMateriales);
+            
+            }   
+            break;
+        
+        case 3:
+            return;
+            break;
+
+        default:
+            cout<<"Ingrese opcion valida: "; 
+            cin>> opcionfuncion; 
+            break;
+
 };
 void funcion_opcion_5(){
     /*
