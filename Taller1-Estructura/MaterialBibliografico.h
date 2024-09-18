@@ -17,5 +17,6 @@ class MaterialBibliografico
     ~MaterialBibliografico();
     void setEstado(string Estado);
     string getEstado();
+    string getNombre();
     virtual void Mostrarinfo();
 };
