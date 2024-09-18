@@ -20,7 +20,7 @@ int printmenu(){
     cout<<"3) Lista de invetario"<< std::endl;
     cout<<"4) Prestar libros"<< std::endl;
     cout<<"5) Gestion de Usuarios"<< std::endl;
-    cout<<"Salir"<<std::endl;
+    cout<<"6) Salir"<<std::endl;
     int opcionMenu;
 
     cout<<"Ingrese opcion: ";
@@ -47,8 +47,10 @@ void funcion_opcion_1(){
     cin>>opcionfuncion;
 };
 
-void funcion_opcion_2(Usuario* usuario, MaterialBibliografico* material){
+void funcion_opcion_2(){
+    /*
    usuario->mostrarMaterialesPrestados();
+   */
 };
 
 void funcion_opcion_3(){
@@ -148,7 +150,7 @@ void Menu(MaterialBibliografico** Lista)
             case 2:
                 out<<"====================" <<std::endl;
                 cout<<"Lista de Materiales Bibliograficos:"<<std::endl;
-                funcion_opcion_2(usuario);
+                funcion_opcion_2();
                 break;
             case 3:
                 funcion_opcion_3();
