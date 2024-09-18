@@ -17,8 +17,8 @@ int printmenu(){
     cout<< std::string(repetirChar,g)<<std::endl;
     cout<<"1) Agregar Material a la Biblioteca"<< std::endl;
     cout<<"2) Mostrar Informacion de los Materiales"<< std::endl;
-    cout<<"3) Lista de invetario"<< std::endl;
-    cout<<"4) Prestar libros"<< std::endl;
+    cout<<"3) Buscar Material"<< std::endl;
+    cout<<"4) Prestar/Devolver libros"<< std::endl;
     cout<<"5) Gestion de Usuarios"<< std::endl;
     cout<<"6) Salir"<<std::endl;
     int opcionMenu;
@@ -148,7 +148,7 @@ void Menu(MaterialBibliografico** Lista)
                 std::cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
                 break;
             case 2:
-                out<<"====================" <<std::endl;
+                cout<<"====================" <<std::endl;
                 cout<<"Lista de Materiales Bibliograficos:"<<std::endl;
                 funcion_opcion_2();
                 break;
