@@ -12,7 +12,8 @@ class libro: public MaterialBibliografico
     string resumen;
 
     public:
-    libro(string Nombre, string Autor, string ISBN, bool Prestado, string FechaDePublicacion,string resumen);
+    libro(string Nombre, string Autor, string ISBN, string Prestado, string FechaDePublicacion,string resumen);
     ~libro();
+    void MostrarInfo() const override;
 
 };
