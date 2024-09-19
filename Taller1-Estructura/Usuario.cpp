@@ -6,6 +6,16 @@ Usuario::Usuario(string Nombre, string id)
     this ->id = id;
 }
 
+string Usuario::getNombre()
+{
+    return this->Nombre;
+}
+
+string Usuario::getId()
+{
+    return this->id;
+}
+
 void Usuario::prestarMaterial(MaterialBibliografico* material)
 {
     cout<<" "<<std::endl;
@@ -14,6 +24,7 @@ void Usuario::prestarMaterial(MaterialBibliografico* material)
     {
         if(this->MaterialesPrestados[aux] == 0 && material->getEstado() == "No Prestado")
         {
+            cout<<"============="<<std::endl;
             cout<<"Se ha guardado el Material"<<std::endl;
             this->MaterialesPrestados[aux] = material;
             material->setEstado("Prestado");
@@ -22,17 +33,44 @@ void Usuario::prestarMaterial(MaterialBibliografico* material)
         }
         else if(material->getEstado() == "Prestado")
         {
+            cout<<"============="<<std::endl;
             cout<<"El material ya fue prestado"<<std::endl;
             return;
         }
         aux++;
     }
+    cout<<"============="<<std::endl;
     cout<<"La lista esta completa, no se puede prestar mas Materiales"<<std::endl;
     cout<<" "<<std::endl;
 }
 
 void Usuario::devolverMaterial(MaterialBibliografico* material)
 {
+    cout<<" "<<std::endl;
+    int aux = 0;
+    while(aux<5)
+    {
+        if(this->MaterialesPrestados[aux] == 0 && material->getEstado() == "No Prestado")
+        {
+            cout<<"============="<<std::endl;
+            cout<<"El material no ha sido Prestado"<<std::endl;
+            cout<<" "<<std::endl;
+            return;
+        }
+        else if(material->getEstado() == "Prestado")
+        {
+            cout<<"============="<<std::endl;
+            cout<<"Se ha devuelto el Material"<<std::endl;
+            this->MaterialesPrestados[aux] = 0;
+            material->setEstado("No Prestado");
+            cout<<" "<<std::endl;
+            return;
+        }
+        aux++;
+    }
+    cout<<"============="<<std::endl;
+    cout<<"La lista esta completa, no se puede prestar mas Materiales"<<std::endl;
+    cout<<" "<<std::endl;
    
 }
 
@@ -46,7 +84,7 @@ void Usuario::mostrarMaterialesPrestados()
         if(this->MaterialesPrestados[aux] != nullptr)
         {
             MaterialBibliografico* objeto = this->MaterialesPrestados[aux];
-            objeto->Mostrarinfo();
+            objeto->MostrarInfo();
             contador += 1;
         }
         aux += 1;
