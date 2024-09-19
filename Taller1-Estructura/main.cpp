@@ -1,9 +1,34 @@
 #include "MaterialBibliografico.cpp"
+#include "libro.cpp"
 #include "Usuario.cpp"
+#include "revista.cpp"
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 
+MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliografico** ListaMateriales, int aux)
+{
+    cout<<"---------------"<<std::endl;
+    cout<<"Introduce el Nombre: "<<std::endl;
+    cin>>nombreMaterial;
+    while(aux<100)
+    {
+        if(ListaMateriales[aux] != nullptr)
+        {
+            if(nombreMaterial == ListaMateriales[aux]->getNombre())
+            {
+                return ListaMateriales[aux];
+            }
+        }
+        if(ListaMateriales[aux] == nullptr)
+        {
+            break;
+        }
+        aux++;
+    }
+    return nullptr;
+};
 
 int printmenu(){
     int repetirChar = 20;
@@ -29,12 +54,58 @@ int printmenu(){
     return opcionMenu;
 };
 
-void funcion_opcion_1(){ //agregar material
+int EncontrarUsuario(std::vector<Usuario*> ListaUsuario, string nombre, string id)
+{
+    int aux = 0;
+    while(aux<ListaUsuario.size())
+    {
+        if(ListaUsuario[aux]->getNombre() == nombre && ListaUsuario[aux]->getId() == id)
+        {
+            return aux;
+        }
+        aux++;
+    }
+    return -1;
+}
+
+void eliminarTodoObjeto(MaterialBibliografico** ListaMateriales, vector<Usuario*> ListaUsuario)
+{
+    int aux = 0;
+    while(aux<100)
+    {
+        if(ListaMateriales[aux] == nullptr)
+        {
+    
+        }
+        else
+        {
+            delete ListaMateriales[aux];
+        }
+        aux++;
+    }
+
+    aux = 0;
+    while(aux<ListaUsuario.size())
+    {
+        delete ListaUsuario[aux];
+        aux++;
+    }
+   
+};
+
+
+MaterialBibliografico** funcion_opcion_1(MaterialBibliografico** ListaMateriales){
     int opcionfuncion;
     int aux = 0;
     string Nombre;
     string Autor;
     string ISBN;
+    string Prestado;
+    string dato2;
+    int dato1Revista;
+    string dato1Libro;
+    libro* LibroNuevo;
+    revista* Revista;
     
 
     cout<<" "<<std::endl;
@@ -42,83 +113,224 @@ void funcion_opcion_1(){ //agregar material
     cout<<"Deseas Agregar Libro o Revista"<<std::endl;
     cout<<"1) Libro"<<std::endl;
     cout<<"2) Revista"<<std::endl;
+    cout<<"3) Salir"<<std::endl;
     cout<<" "<<std::endl;
     cout<<"Ingresa Opcion: "<<std::endl;
     cin>>opcionfuncion;
+
+    switch(opcionfuncion)
+    {
+        case 1:
+            cout<<"Introduce Nombre: "<<std::endl;
+            cin>>Nombre;
+            cout<<"Introduce Autor: "<<std::endl;
+            cin>>Autor;
+            cout<<"Introduce ISBN: "<<std::endl;
+            cin>>ISBN;
+            cout<<"Introduce Fecha De Publicacion: "<<std::endl;
+            cin>>dato1Libro;
+            cout<<"Introduce Resumen: "<<std::endl;
+            cin>>dato2;
+            while(aux<100)
+            {
+                if(ListaMateriales[aux] == nullptr)
+                {
+                    LibroNuevo = new libro(Nombre,Autor,ISBN,"No Prestado",dato1Libro,dato2);
+                    ListaMateriales[aux] = LibroNuevo;
+                    cout<<""<<std::endl;
+                    cout<<"==========="<<std::endl;
+                    cout<<""<<std::endl;
+                    cout<<"Se ha guardado el Libro"<<std::endl;
+                    cout<<""<<std::endl;
+                    funcion_opcion_1(ListaMateriales);
+                    break;
+                }
+                aux++;
+            }
+            cout<<"No quedan espacios en Lista de Materiales"<<std::endl;
+            break;
+        
+        case 2:
+            cout<<"Introduce Nombre: "<<std::endl;
+            cin>>Nombre;
+            cout<<"Introduce Autor: "<<std::endl;
+            cin>>Autor;
+            cout<<"Introduce ISBN: "<<std::endl;
+            cin>>ISBN;
+            cout<<"Introduce Numero de Edicion: "<<std::endl;
+            cin>>dato1Revista;
+            cout<<"Introduce Mes de Publicacion: "<<std::endl;
+            cin>>dato2;
+            while(aux<100)
+            {
+                if(ListaMateriales[aux] == nullptr)
+                {
+                    Revista = new revista(Nombre,Autor,ISBN,"No Prestado",dato1Revista,dato2);
+                    ListaMateriales[aux] = Revista;
+                    cout<<""<<std::endl;
+                    cout<<"==========="<<std::endl;
+                    cout<<""<<std::endl;
+                    cout<<"Se ha guardado la Revista"<<std::endl;
+                    cout<<""<<std::endl;
+                    funcion_opcion_1(ListaMateriales);
+                    break;
+                }
+                aux++;
+            }
+            cout<<"No quedan espacios en Lista de Materiales"<<std::endl;
+            break;
+
+        case 3:
+            return ListaMateriales;
+            break;
+
+        default:
+            cout<<"Ingrese opcion valida: "; 
+            cin>> opcionfuncion; 
+            break;
+    }
 };
 
-void funcion_opcion_2(){ //mostrar info del material
-    /*
-   usuario->mostrarMaterialesPrestados();
-   */
+
+void funcion_opcion_2(MaterialBibliografico** ListaMateriales){
+    int contador = 0;
+    int aux = 0;
+    while(aux<100)
+    {
+        if(ListaMateriales[aux] != nullptr)
+        {
+            ListaMateriales[aux]->MostrarInfo();
+            cout<<""<<std::endl;
+            contador += 1;
+        }
+        aux++;
+    }
+    if(contador == 0)
+    {
+        cout<<""<<std::endl;
+        cout<<"La Biblioteca se encuentra vacia de Materiales"<<std::endl;
+        cout<<""<<std::endl;
+        return;
+    }
+    return;
+    
 };
 
-void funcion_opcion_3(MaterialBibliografico** listaDeMaterial){  //buscar material
+void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
+
+    int contador = 0;
+    MaterialBibliografico* Material;
+    string MetodoDeBusqueda;
     int aux = 0;
     int opcionfuncion;
-    MaterialBibliografico* elcoso;
+    string AutorMaterial;
     cout<<" "<<std::endl;
     cout<<"==========="<<std::endl;
     cout<<"Deseas por Nombre o Autor"<<std::endl;
     cout<<"1) Nombre"<<std::endl;
     cout<<"2) Autor"<<std::endl;
+    cout<<"3) Salir"<<std::endl;
     cout<<" "<<std::endl;
     cout<<"Ingresa Opcion: "<<std::endl;
     cin>>opcionfuncion;
-    string nombrematerial;
 
-    switch(opcionfuncion){
-        case 1:
-
-            //buscar por nombre
-            cout<<"Ingrese Nombre del material a buscar"<<std::endl;
-            cin>> nombrematerial;
-            elcoso = EncontrarMaterial(nombrematerial,listaDeMaterial,aux)
-            if(elcoso != nullptr){ 
-            cout<<"Informacion del material"<<std::endl;
-            cout<<elcoso->getNombre()<<" Autor: "<<elcoso->getAutor()<<" Estado: "<<elcoso->getEstado()<<std::endl;
-            }
-            else{
-                cout<<" "<<std::endl;
-                cout<<"================="<<std::endl;
-                cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
-            }
-            delete elcoso;
-            break;
-        case 2:
-
-            break;
-        default:
-            cout<<"Ingrese opcion valida"<<std::endl;
-            cin>>opcionfuncion;
-    }
-};
-
-
-MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliografico** ListaMateriales, int aux)
-{
-    cout<<"---------------"<<std::endl;
-    cout<<"Introduce el Nombre: "<<std::endl;
-    cin>>nombreMaterial;
-    while(aux<100)
+    switch(opcionfuncion)
     {
-        if(ListaMateriales[aux] != nullptr)
-        {
-            if(nombreMaterial == ListaMateriales[aux]->getNombre())
+        case 1:
+            cout<<"---------------"<<std::endl;
+            cout<<"Introduce el Nombre: "<<std::endl;
+            cin>>AutorMaterial;
+            while(aux<100)
             {
-                return ListaMateriales[aux];
+                if(ListaMaterial[aux] != nullptr)
+                {
+                    if(AutorMaterial == ListaMaterial[aux]->getNombre())
+                    {
+                        cout<<" "<<std::endl;
+                        cout<<"==========="<<std::endl;
+                        cout<<" "<<std::endl;
+                        ListaMaterial[aux]->MostrarInfo();
+                        contador += 1;
+                        
+                    }
+                }
+                if(ListaMaterial[aux] == nullptr && contador == 0)
+                {
+                    cout<<" "<<std::endl;
+                    cout<<"================="<<std::endl;
+                    cout<<" "<<std::endl;
+                    cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    funcion_opcion_3(ListaMaterial);
+                    break;
+                }
+                aux++;
             }
-        }
-        if(ListaMateriales[aux] == nullptr)
-        {
+            if(contador != 0)
+            {
+                funcion_opcion_3(ListaMaterial);
+            }
+            cout<<" "<<std::endl;
+            cout<<"================="<<std::endl;
+            cout<<" "<<std::endl;
+            cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+            funcion_opcion_3(ListaMaterial);
             break;
-        }
-        aux++;
+        
+        case 2:
+            cout<<"---------------"<<std::endl;
+            cout<<"Introduce el Autor: "<<std::endl;
+            cin>>AutorMaterial;
+            while(aux<100)
+            {
+                if(ListaMaterial[aux] != nullptr)
+                {
+                    if(AutorMaterial == ListaMaterial[aux]->getAutor())
+                    {
+                        cout<<" "<<std::endl;
+                        cout<<"==========="<<std::endl;
+                        cout<<" "<<std::endl;
+                        ListaMaterial[aux]->MostrarInfo();
+                        contador += 1;
+                        
+                    }
+                }
+                if(ListaMaterial[aux] == nullptr && contador == 0)
+                {
+                    cout<<" "<<std::endl;
+                    cout<<"================="<<std::endl;
+                    cout<<" "<<std::endl;
+                    cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    funcion_opcion_3(ListaMaterial);
+                    break;
+                }
+                aux++;
+            }
+            if(contador != 0)
+            {
+                funcion_opcion_3(ListaMaterial);
+            }
+            cout<<" "<<std::endl;
+            cout<<"================="<<std::endl;
+            cout<<" "<<std::endl;
+            cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+            funcion_opcion_3(ListaMaterial);
+            break;
+
+        case 3:
+            return;
+            break;
+
+        default:
+            cout<<"Ingrese opcion valida: "; 
+            cin>> opcionfuncion; 
+            break;
     }
-    return nullptr;
 };
 
-void funcion_opcion_4(MaterialBibliografico** ListaMateriales){ //prestar material
+void funcion_opcion_4(MaterialBibliografico** ListaMateriales, vector<Usuario*> ListaUsuario){
+    int Usuario;
+    string Nombre;
+    string ID;
     MaterialBibliografico* Material;
     int aux = 0;
     int opcionfuncion;
@@ -136,74 +348,68 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales){ //prestar materi
     switch(opcionfuncion)
     {
         case 1:
-            Material = EncontrarMaterial(nombreMaterial,ListaMateriales,aux);
-            if(Material != nullptr)
+            cout<<" "<<std::endl;
+            cout<<"========="<<std::endl;
+            cout<<"Ingrese Nombre de Usuario: "<<std::endl;
+            cin>>Nombre;
+            cout<<"Ingrese ID del Usuario: "<<std::endl;
+            cin>>ID;
+
+            Usuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
+            if(Usuario != -1)
             {
-                if(Material->getEstado() == "No Prestado")
+                Material = EncontrarMaterial(nombreMaterial,ListaMateriales,aux);
+                if(Material == nullptr)
                 {
-                    cout<<" "<<std::endl;
-                    cout<<"================="<<std::endl;
-                    cout<<" "<<std::endl;
-                    cout<<"Se ha realizado el prestamo del material"<<std::endl;
-                    Material->setEstado("Prestado");
-                    funcion_opcion_4(ListaMateriales);
-                    
+                    cout<<""<<std::endl;
+                    cout<<"============="<<std::endl;
+                    cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    funcion_opcion_4(ListaMateriales,ListaUsuario);
                 }
-                else
-                {
-                    cout<<" "<<std::endl;
-                    cout<<"================="<<std::endl;
-                    cout<<" "<<std::endl;
-                    cout<<"El material ya se encuentra prestado"<<std::endl;
-                    funcion_opcion_4(ListaMateriales);
-                }
-                    
+                ListaUsuario[Usuario]->prestarMaterial(Material);
+                funcion_opcion_4(ListaMateriales,ListaUsuario);
             }
             else
             {
                 cout<<" "<<std::endl;
-                cout<<"================="<<std::endl;
-                cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
-                funcion_opcion_4(ListaMateriales);
-            
-            }   
-            delete Material;
+                cout<<"================"<<std::endl;
+                cout<<""<<std::endl;
+                cout<<"El Usuario no existe"<<std::endl;
+                funcion_opcion_4(ListaMateriales,ListaUsuario);
+            }
             break;
         
 
         case 2:
-            Material = EncontrarMaterial(nombreMaterial,ListaMateriales,aux);
-            if(Material != nullptr)
+            cout<<" "<<std::endl;
+            cout<<"========="<<std::endl;
+            cout<<"Ingrese Nombre de Usuario: "<<std::endl;
+            cin>>Nombre;
+            cout<<"Ingrese ID del Usuario: "<<std::endl;
+            cin>>ID;
+
+            Usuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
+            if(Usuario != -1)
             {
-                if(Material->getEstado() == "No Prestado")
+                Material = EncontrarMaterial(nombreMaterial,ListaMateriales,aux);
+                if(Material == nullptr)
                 {
-                    cout<<" "<<std::endl;
-                    cout<<"================="<<std::endl;
-                    cout<<" "<<std::endl;
-                    cout<<"El material no ha sido prestado"<<std::endl;
-                    funcion_opcion_4(ListaMateriales);
-                    
+                    cout<<""<<std::endl;
+                    cout<<"============="<<std::endl;
+                    cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    funcion_opcion_4(ListaMateriales,ListaUsuario);
                 }
-                else
-                {
-                    cout<<" "<<std::endl;
-                    cout<<"================="<<std::endl;
-                    cout<<" "<<std::endl;
-                    cout<<"Se ha realizado la devolucion"<<std::endl;
-                    Material->setEstado("No Prestado");
-                    funcion_opcion_4(ListaMateriales);
-                }
-                    
+                ListaUsuario[Usuario]->devolverMaterial(Material);
+                funcion_opcion_4(ListaMateriales,ListaUsuario);
             }
-            if(Material == nullptr)
+            else
             {
                 cout<<" "<<std::endl;
-                cout<<"================="<<std::endl;
-                cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
-                funcion_opcion_4(ListaMateriales);
-            
-            }   
-            delete Material;
+                cout<<"================"<<std::endl;
+                cout<<""<<std::endl;
+                cout<<"El Usuario no existe"<<std::endl;
+                funcion_opcion_4(ListaMateriales,ListaUsuario);
+            }
             break;
         
         case 3:
@@ -219,44 +425,161 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales){ //prestar materi
     }
 };
 
-void funcion_opcion_5(){
-    /*
-        ESCRIBIR LO QUE HACE LA FUNCION 4
-    */
+
+vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
+    int indiceUsuario;
+    string Nombre;
+    string ID;
+    int opcionfuncion;
+    cout<<" "<<std::endl;
+    cout<<"==================="<<std::endl;
+    cout<<"Que desea hacer?"<<std::endl;
+    cout<<"1) Crear Usuario"<<std::endl;
+    cout<<"2) Eliminar Usuario"<<std::endl;
+    cout<<"3) Buscar Usuario"<<std::endl;
+    cout<<"4) Salir"<<std::endl;
+    cout<<"Ingrese opcion: "<<std::endl;
+    cin>> opcionfuncion;
+
+    switch(opcionfuncion)
+    {
+        case 1:
+            cout<<" "<<std::endl;
+            cout<<"============="<<std::endl;
+            cout<<"Introduce Nombre: "<<std::endl;
+            cin>>Nombre;
+            cout<<"Introduce ID: "<<std::endl;
+            cin>>ID;
+
+            indiceUsuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
+            if(indiceUsuario == -1)
+            {
+                Usuario* NuevoUsuario = new Usuario(Nombre,ID);
+                ListaUsuario.push_back(NuevoUsuario);
+                cout<<" "<<std::endl;
+                cout<<"================"<<std::endl;
+                cout<<""<<std::endl;
+                cout<<"Usuario creado con exito"<<std::endl;
+                funcion_opcion_5(ListaUsuario);
+            }
+            else
+            {
+                cout<<" "<<std::endl;
+                cout<<"================"<<std::endl;
+                cout<<""<<std::endl;
+                cout<<"El Usuario ya existe"<<std::endl;
+                funcion_opcion_5(ListaUsuario);
+            }
+            break;
+
+        case 2:
+            cout<<" "<<std::endl;
+            cout<<"============="<<std::endl;
+            cout<<"Introduce Nombre: "<<std::endl;
+            cin>>Nombre;
+            cout<<"Introduce ID: "<<std::endl;
+            cin>>ID;
+
+            indiceUsuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
+            if(indiceUsuario == -1)
+            {
+                cout<<" "<<std::endl;
+                cout<<"================"<<std::endl;
+                cout<<""<<std::endl;
+                cout<<"El Usuario no existe"<<std::endl;
+                funcion_opcion_5(ListaUsuario);
+            }
+            else
+            {
+                Usuario* usuario = ListaUsuario[indiceUsuario];
+                ListaUsuario.erase(ListaUsuario.begin() + indiceUsuario);
+                delete usuario;
+                cout<<" "<<std::endl;
+                cout<<"================"<<std::endl;
+                cout<<""<<std::endl;
+                cout<<"Usuario eliminado"<<std::endl;
+                funcion_opcion_5(ListaUsuario);
+
+            }
+            break;
+
+        case 3:
+            cout<<" "<<std::endl;
+            cout<<"============="<<std::endl;
+            cout<<"Introduce Nombre: "<<std::endl;
+            cin>>Nombre;
+            cout<<"Introduce ID: "<<std::endl;
+            cin>>ID;
+
+            indiceUsuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
+            if(indiceUsuario == -1)
+            {
+                cout<<" "<<std::endl;
+                cout<<"================"<<std::endl;
+                cout<<""<<std::endl;
+                cout<<"El Usuario no existe"<<std::endl;
+                funcion_opcion_5(ListaUsuario);
+            }
+            else
+            {
+                Usuario* usuario = ListaUsuario[indiceUsuario];
+                cout<<""<<std::endl;
+                cout<<"=============="<<std::endl;
+                cout<<"Nombre: "<<usuario->getNombre()<<std::endl;
+                cout<<"ID: "<<usuario->getId()<<std::endl;
+                cout<<""<<std::endl;
+                cout<<"Lista Materiales"<<std::endl;
+                usuario->mostrarMaterialesPrestados();
+                funcion_opcion_5(ListaUsuario);
+            
+            }
+            break;
+        
+        case 4:
+            return ListaUsuario;
+            break;
+
+        default:
+            cout<<"Ingrese opcion valida: "; 
+            cin>> opcionfuncion; 
+            break;
+    }
+    return ListaUsuario;
 };
 
-void Menu(MaterialBibliografico** Lista)
+
+
+void Menu(MaterialBibliografico** Lista, vector<Usuario*> ListaUsuario)
 {
-    bool niger = true;
-    while(niger)
+    bool EstadoMenu = true;
+    while(EstadoMenu)
     {
         int opcionMenu = printmenu();
         switch(opcionMenu)
         {
             case 1:
-                funcion_opcion_1();
+                funcion_opcion_1(Lista);
                 std::cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
                 break;
             case 2:
                 cout<<"====================" <<std::endl;
                 cout<<"Lista de Materiales Bibliograficos:"<<std::endl;
-                funcion_opcion_2();
+                cout<<""<<std::endl;
+                funcion_opcion_2(Lista);
                 break;
             case 3:
-                funcion_opcion_3();
-                std::cout<<"OPCION 3 MI LOCO"<< std::endl;
+                funcion_opcion_3(Lista);
                 break;
             case 4:
-                funcion_opcion_4(Lista);
-                std::cout<<"OPCION 4 MI LOCO"<< std::endl;
+                funcion_opcion_4(Lista,ListaUsuario);
                 break;
             case 5:
-                funcion_opcion_5();
-                std::cout<<"OPCION 5 MI LOCO"<< std::endl;
+                ListaUsuario = funcion_opcion_5(ListaUsuario);
                 break;
 
             case 6:
-                niger = false;
+                EstadoMenu = false;
+                eliminarTodoObjeto(Lista,ListaUsuario);
                 break;
 
             default:
@@ -269,9 +592,11 @@ void Menu(MaterialBibliografico** Lista)
 
 
 int main(){
-    MaterialBibliografico* principito2 = new MaterialBibliografico("Lolero","pepe","popo","No Prestado");
-    MaterialBibliografico* principito = new MaterialBibliografico("Principito","pepe","popo","No Prestado");
-    MaterialBibliografico* ListaMateriales[100] = {principito,principito2};
-    Menu(ListaMateriales);
+    MaterialBibliografico* principito3 = new libro("Principito","Lolero69","pope","No Prestado","10 de Octubre","el mata pao");
+    MaterialBibliografico* principito2 = new revista("Lolero","pepe","popo","No Prestado",21,"Octubre");
+    MaterialBibliografico* ListaMateriales[100] = {principito2,principito3};
+    vector<Usuario *> ListaUsuario;
+    Menu(ListaMateriales, ListaUsuario);
     return 0;
 }
+
