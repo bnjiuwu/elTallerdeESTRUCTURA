@@ -14,6 +14,8 @@ class Usuario
 
     public:
     Usuario(string Nombre, string id);
+    string getNombre();
+    string getId();
     void prestarMaterial(MaterialBibliografico* material);
     void devolverMaterial(MaterialBibliografico* material);
     void mostrarMaterialesPrestados();
