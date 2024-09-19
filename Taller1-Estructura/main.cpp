@@ -29,7 +29,7 @@ int printmenu(){
     return opcionMenu;
 };
 
-void funcion_opcion_1(){
+void funcion_opcion_1(){ //agregar material
     int opcionfuncion;
     int aux = 0;
     string Nombre;
@@ -47,15 +47,16 @@ void funcion_opcion_1(){
     cin>>opcionfuncion;
 };
 
-void funcion_opcion_2(){
+void funcion_opcion_2(){ //mostrar info del material
     /*
    usuario->mostrarMaterialesPrestados();
    */
 };
 
-void funcion_opcion_3(){
+void funcion_opcion_3(MaterialBibliografico** listaDeMaterial){  //buscar material
     int aux = 0;
     int opcionfuncion;
+    MaterialBibliografico* elcoso;
     cout<<" "<<std::endl;
     cout<<"==========="<<std::endl;
     cout<<"Deseas por Nombre o Autor"<<std::endl;
@@ -64,6 +65,33 @@ void funcion_opcion_3(){
     cout<<" "<<std::endl;
     cout<<"Ingresa Opcion: "<<std::endl;
     cin>>opcionfuncion;
+    string nombrematerial;
+
+    switch(opcionfuncion){
+        case 1:
+
+            //buscar por nombre
+            cout<<"Ingrese Nombre del material a buscar"<<std::endl;
+            cin>> nombrematerial;
+            elcoso = EncontrarMaterial(nombrematerial,listaDeMaterial,aux)
+            if(elcoso != nullptr){ 
+            cout<<"Informacion del material"<<std::endl;
+            cout<<elcoso->getNombre()<<" Autor: "<<elcoso->getAutor()<<" Estado: "<<elcoso->getEstado()<<std::endl;
+            }
+            else{
+                cout<<" "<<std::endl;
+                cout<<"================="<<std::endl;
+                cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+            }
+            delete elcoso;
+            break;
+        case 2:
+
+            break;
+        default:
+            cout<<"Ingrese opcion valida"<<std::endl;
+            cin>>opcionfuncion;
+    }
 };
 
 
@@ -90,7 +118,7 @@ MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliogr
     return nullptr;
 };
 
-void funcion_opcion_4(MaterialBibliografico** ListaMateriales){
+void funcion_opcion_4(MaterialBibliografico** ListaMateriales){ //prestar material
     MaterialBibliografico* Material;
     int aux = 0;
     int opcionfuncion;
@@ -131,7 +159,7 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales){
                 }
                     
             }
-            if(Material == nullptr)
+            else
             {
                 cout<<" "<<std::endl;
                 cout<<"================="<<std::endl;
@@ -139,6 +167,7 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales){
                 funcion_opcion_4(ListaMateriales);
             
             }   
+            delete Material;
             break;
         
 
@@ -174,6 +203,7 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales){
                 funcion_opcion_4(ListaMateriales);
             
             }   
+            delete Material;
             break;
         
         case 3:
