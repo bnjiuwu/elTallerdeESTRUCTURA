@@ -16,7 +16,8 @@ class MaterialBibliografico
     MaterialBibliografico(string Nombre,string Autor, string ISBN, string Presstado);
     ~MaterialBibliografico();
     void setEstado(string Estado);
+    string getAutor();
     string getEstado();
     string getNombre();
-    virtual void Mostrarinfo();
+    virtual void MostrarInfo() const = 0;
 };
