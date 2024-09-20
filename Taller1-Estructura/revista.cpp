@@ -21,3 +21,7 @@ void revista::MostrarInfo() const
     cout<<"Mes de Publicacion de la Revista: "<<this->mesPublicacion<<".";
     cout<<" "<<std::endl;
 }
+string revista::toString() const
+{
+    return "Revista,"+this->Nombre+","+this->Autor+","+this->ISBN+","+this->Prestado+","+to_string(this->numeroEdicion)+","+this->mesPublicacion;
+}
