@@ -1,5 +1,4 @@
-Las Aventras De Vicente Octavio,0-306-40615-2,Diego Ravanal Vanzi,Libro,Prestado,12-02-2034,resumen Octavio
-Mitos y Leyendas del server,978-0-306-40615-7,Benjamin Jesus Cristo,Libro,No prestado,06-12-1830, resumen SE FLITRO EL CHAT
-Puro chamuyo,1-86197-876-9,Eneo Monsalve,Revista,No prestado,23,
-Playboy,978-1-86197-876-9,J Honores,Revista,Prestado,46,
-
+Libro,Las Aventras De Vicente Octavio,Diego Ravanal Vanzi,0-306-40615-2,Prestado,12-02-2034,Octavio
+Libro,Mitos y Leyendas del server,Benjamin Jesus Cristo,978-0-306-40615-7,No prestado,06-12-1830,SE FLITRO EL CHAT
+Revista,Puro chamuyo,Eneo Monsalve,1-86197-876-9,No prestado,23,Octubre
+Revista,Playboy,J Honores,978-1-86197-876-9,Prestado,46,Septiembre
