@@ -14,5 +14,6 @@ class revista: public MaterialBibliografico
         revista(string Nombre,string Autor, string ISBN, string Prestado,int numeroEdicion,string mesPublicacion);
         ~revista();
         void MostrarInfo() const override;
+        string toString() const override;
 
 };
