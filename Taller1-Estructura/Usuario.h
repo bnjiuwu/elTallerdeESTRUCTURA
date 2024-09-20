@@ -18,8 +18,6 @@ class Usuario
     string getId();
     void prestarMaterial(MaterialBibliografico* material);
     void devolverMaterial(MaterialBibliografico* material);
-    void mostrarMaterialesPrestados();
+    int mostrarMaterialesPrestados();
     ~Usuario();
-
-
 };
