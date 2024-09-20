@@ -19,5 +19,6 @@ class MaterialBibliografico
     string getAutor();
     string getEstado();
     string getNombre();
+    virtual string toString() const = 0;
     virtual void MostrarInfo() const = 0;
 };
