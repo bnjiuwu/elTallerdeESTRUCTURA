@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include <vector>
 
 MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliografico** ListaMateriales, int aux)
@@ -260,19 +261,12 @@ void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
                     cout<<"================="<<std::endl;
                     cout<<" "<<std::endl;
                     cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
-                    funcion_opcion_3(ListaMaterial);
                     break;
+                    funcion_opcion_3(ListaMaterial);
+                    
                 }
                 aux++;
             }
-            if(contador != 0)
-            {
-                funcion_opcion_3(ListaMaterial);
-            }
-            cout<<" "<<std::endl;
-            cout<<"================="<<std::endl;
-            cout<<" "<<std::endl;
-            cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
             funcion_opcion_3(ListaMaterial);
             break;
         
@@ -300,19 +294,12 @@ void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
                     cout<<"================="<<std::endl;
                     cout<<" "<<std::endl;
                     cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
-                    funcion_opcion_3(ListaMaterial);
                     break;
+                    funcion_opcion_3(ListaMaterial);
+                    
                 }
                 aux++;
             }
-            if(contador != 0)
-            {
-                funcion_opcion_3(ListaMaterial);
-            }
-            cout<<" "<<std::endl;
-            cout<<"================="<<std::endl;
-            cout<<" "<<std::endl;
-            cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
             funcion_opcion_3(ListaMaterial);
             break;
 
@@ -492,13 +479,25 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
             else
             {
                 Usuario* usuario = ListaUsuario[indiceUsuario];
-                ListaUsuario.erase(ListaUsuario.begin() + indiceUsuario);
-                delete usuario;
-                cout<<" "<<std::endl;
-                cout<<"================"<<std::endl;
-                cout<<""<<std::endl;
-                cout<<"Usuario eliminado"<<std::endl;
-                funcion_opcion_5(ListaUsuario);
+                if(usuario->mostrarMaterialesPrestados() == 0)
+                {
+                    ListaUsuario.erase(ListaUsuario.begin() + indiceUsuario);
+                    delete usuario;
+                    cout<<" "<<std::endl;
+                    cout<<"================"<<std::endl;
+                    cout<<""<<std::endl;
+                    cout<<"Usuario eliminado"<<std::endl;
+                    funcion_opcion_5(ListaUsuario);
+                }
+                else
+                {
+                    cout<<" "<<std::endl;
+                    cout<<"================"<<std::endl;
+                    cout<<""<<std::endl;
+                    cout<<"El Usuario debe devolver Materiales antes de ser eliminado"<<std::endl;
+                    funcion_opcion_5(ListaUsuario);
+                }
+
 
             }
             break;
@@ -559,7 +558,6 @@ void Menu(MaterialBibliografico** Lista, vector<Usuario*> ListaUsuario)
         {
             case 1:
                 funcion_opcion_1(Lista);
-                std::cout<<"MIRA MI NEGRO USTE E TONTO  1"<< std::endl; 
                 break;
             case 2:
                 cout<<"====================" <<std::endl;
@@ -590,13 +588,31 @@ void Menu(MaterialBibliografico** Lista, vector<Usuario*> ListaUsuario)
     }
 };
 
+void LecturaArch()
+{
+    std::ifstream archivo("biblioteca.txt");
+    if(!archivo.is_open())
+    {
+        cerr << "Error al abrir el archivo" << std::endl;
+    }
+
+    string linea;
+
+    while(getline(archivo,linea))
+    {
+        cout<<linea<<std::endl;
+    }
+
+    archivo.close();
+}
+
 
 int main(){
-    MaterialBibliografico* principito3 = new libro("Principito","Lolero69","pope","No Prestado","10 de Octubre","el mata pao");
-    MaterialBibliografico* principito2 = new revista("Lolero","pepe","popo","No Prestado",21,"Octubre");
-    MaterialBibliografico* ListaMateriales[100] = {principito2,principito3};
+    MaterialBibliografico* Novolibro = new libro("Lolero","pepe","pepe","No Prestado","octubre","el lolero del maincraft");
+    MaterialBibliografico* ListaMateriales[100] = {Novolibro};
     vector<Usuario *> ListaUsuario;
     Menu(ListaMateriales, ListaUsuario);
     return 0;
 }
+
 
