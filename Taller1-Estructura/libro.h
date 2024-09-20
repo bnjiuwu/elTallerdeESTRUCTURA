@@ -15,5 +15,6 @@ class libro: public MaterialBibliografico
     libro(string Nombre, string Autor, string ISBN, string Prestado, string FechaDePublicacion,string resumen);
     ~libro();
     void MostrarInfo() const override;
+    string toString() const override;
 
 };
