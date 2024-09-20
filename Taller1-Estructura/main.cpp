@@ -3,6 +3,7 @@
 #include "Usuario.cpp"
 #include "revista.cpp"
 #include <fstream>
+#include <sstream>
 #include <vector>
 
 
@@ -552,6 +553,17 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
 };
 
 
+void GuardarMateriales(MaterialBibliografico** ListaMaterial) {
+    ofstream archivo("biblioteca.txt");
+
+    for (int i = 0; i < 100; ++i) {
+        if (ListaMaterial[i] != nullptr) {
+            archivo << ListaMaterial[i]->toString() << endl; // Escribe cada material en el archivo
+        }
+    }
+    archivo.close();
+}
+
 
 void Menu(MaterialBibliografico** Lista, vector<Usuario*> ListaUsuario)
 {
@@ -582,6 +594,7 @@ void Menu(MaterialBibliografico** Lista, vector<Usuario*> ListaUsuario)
 
             case 6:
                 EstadoMenu = false;
+                GuardarMateriales(Lista);
                 eliminarTodoObjeto(Lista,ListaUsuario);
                 break;
 
@@ -593,8 +606,52 @@ void Menu(MaterialBibliografico** Lista, vector<Usuario*> ListaUsuario)
     }
 };
 
-void LecturaArch()
+
+vector<std::string> splitPorComillas(string linea)
 {
+    std::vector<std::string> elementos;
+    std::istringstream ss(linea);
+    std::string elemento;
+
+    while (getline(ss, elemento, ','))  // Leer hasta encontrar una coma
+    {
+        elementos.push_back(elemento);  // Añadir cada elemento separado al vector
+    }
+
+    return elementos;
+}
+
+vector<Usuario*> LecturaUsuario(vector<Usuario*> ListaUsuario)
+{
+    std::ifstream archivo("biblioteca.txt");
+    if(!archivo.is_open())
+    {
+        cerr << "Error al abrir el archivo" << std::endl;
+    }
+    string linea;
+
+    
+    while(true)
+    {
+        getline(archivo, linea);
+        if (linea.empty()) {
+            break;
+        }
+        vector<string> elementos = splitPorComillas(linea);
+
+        string Nombre = elementos[0];
+        string ID = elementos[1];
+
+        Usuario* NuevoUsuario = new Usuario(Nombre,ID);
+        ListaUsuario.push_back(NuevoUsuario);
+    }
+    return ListaUsuario;
+
+}
+
+MaterialBibliografico** LecturaArch(MaterialBibliografico** ListaMaterial)
+{
+    int aux = 0;
     std::ifstream archivo("biblioteca.txt");
     if(!archivo.is_open())
     {
@@ -603,19 +660,63 @@ void LecturaArch()
 
     string linea;
 
-    while(getline(archivo,linea))
-    {
-        cout<<linea<<std::endl;
-    }
+    while (true) {
+        getline(archivo, linea);
+        if (linea.empty()) {
+            break; // Sale del bucle si la línea está vacía
+        }
+        vector<string> elementos = splitPorComillas(linea);
 
-    archivo.close();
+
+        if (elementos[0] == "Revista") {
+            aux = 0;
+            string Nombre = elementos[1];
+            string Autor = elementos[2];
+            string ISBN = elementos[3];
+            string Prestado = elementos[4];
+            int NumeroEdicion = stoi(elementos[5]);
+            string mesPublicacion = elementos[6];
+
+            while (aux < 100) 
+            {
+                if (ListaMaterial[aux] == nullptr) 
+                {
+                    ListaMaterial[aux] = new revista(Nombre, Autor, ISBN, Prestado, NumeroEdicion, mesPublicacion);
+                    break;
+                }
+                aux++;
+            }
+        } 
+        else if (elementos[0] == "Libro") 
+        {
+            aux = 0;
+            string Nombre = elementos[1];
+            string Autor = elementos[2];
+            string ISBN = elementos[3];
+            string Prestado = elementos[4];
+            string FechaDePublicacion = elementos[5];
+            string Resumen = elementos[6];
+
+            while (aux < 100) 
+            {
+                if (ListaMaterial[aux] == nullptr) 
+                {
+                    ListaMaterial[aux] = new libro(Nombre, Autor, ISBN, Prestado, FechaDePublicacion, Resumen);
+                    break;
+                }
+                aux++;
+            }
+        }
+    }
+    return ListaMaterial;
 }
 
 
 int main(){
-    MaterialBibliografico* Novolibro = new libro("Lolero","pepe","pepe","No Prestado","octubre","el lolero del maincraft");
-    MaterialBibliografico* ListaMateriales[100] = {Novolibro};
+    MaterialBibliografico* ListaMateriales[100] = {nullptr};
     vector<Usuario *> ListaUsuario;
-    Menu(ListaMateriales, ListaUsuario);
+    vector<Usuario*> NuevosUsuarios = LecturaUsuario(ListaUsuario);
+    MaterialBibliografico** NuevosMateriales = LecturaArch(ListaMateriales);
+    Menu(NuevosMateriales, NuevosUsuarios);
     return 0;
 }
