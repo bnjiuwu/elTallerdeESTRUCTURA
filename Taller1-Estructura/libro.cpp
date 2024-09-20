@@ -25,3 +25,8 @@ void libro::MostrarInfo() const
   cout<<"Resumen del Libro: "<<this->resumen<<", ";
   cout<<" "<<std::endl;
 }
+
+string libro::toString() const
+{
+    return "Libro,"+this->Nombre+","+this->Autor+","+this->ISBN+","+this->Prestado+","+this->FechaDePublicacion+","+this->resumen;
+}
