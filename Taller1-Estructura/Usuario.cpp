@@ -74,7 +74,7 @@ void Usuario::devolverMaterial(MaterialBibliografico* material)
    
 }
 
-void Usuario::mostrarMaterialesPrestados()
+int Usuario::mostrarMaterialesPrestados()
 {
     cout<<" "<<std::endl;
     int aux = 0;
@@ -93,6 +93,7 @@ void Usuario::mostrarMaterialesPrestados()
     {
         cout<<"No hay libros en la lista"<<std::endl;  
     }
+    return contador;
     cout<<" "<<std::endl;
 }
 
