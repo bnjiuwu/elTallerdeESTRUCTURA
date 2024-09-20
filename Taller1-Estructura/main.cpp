@@ -2,17 +2,16 @@
 #include "libro.cpp"
 #include "Usuario.cpp"
 #include "revista.cpp"
-#include <iostream>
-#include <string>
 #include <fstream>
-#include <sstream>
 #include <vector>
+
 
 MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliografico** ListaMateriales, int aux)
 {
     cout<<"---------------"<<std::endl;
     cout<<"Introduce el Nombre: "<<std::endl;
-    cin>>nombreMaterial;
+
+    getline(cin,nombreMaterial);
     while(aux<100)
     {
         if(ListaMateriales[aux] != nullptr)
@@ -119,19 +118,21 @@ MaterialBibliografico** funcion_opcion_1(MaterialBibliografico** ListaMateriales
     cout<<"Ingresa Opcion: "<<std::endl;
     cin>>opcionfuncion;
 
+    cin.ignore();
+
     switch(opcionfuncion)
     {
         case 1:
             cout<<"Introduce Nombre: "<<std::endl;
-            cin>>Nombre;
+            getline(cin,Nombre);
             cout<<"Introduce Autor: "<<std::endl;
-            cin>>Autor;
+            getline(cin,Autor);
             cout<<"Introduce ISBN: "<<std::endl;
-            cin>>ISBN;
+            getline(cin,ISBN);
             cout<<"Introduce Fecha De Publicacion: "<<std::endl;
-            cin>>dato1Libro;
+            getline(cin,dato1Libro);
             cout<<"Introduce Resumen: "<<std::endl;
-            cin>>dato2;
+            getline(cin,dato2);
             while(aux<100)
             {
                 if(ListaMateriales[aux] == nullptr)
@@ -153,15 +154,16 @@ MaterialBibliografico** funcion_opcion_1(MaterialBibliografico** ListaMateriales
         
         case 2:
             cout<<"Introduce Nombre: "<<std::endl;
-            cin>>Nombre;
+            getline(cin,Nombre);
             cout<<"Introduce Autor: "<<std::endl;
-            cin>>Autor;
+            getline(cin,Autor);
             cout<<"Introduce ISBN: "<<std::endl;
-            cin>>ISBN;
+            getline(cin,ISBN);
             cout<<"Introduce Numero de Edicion: "<<std::endl;
             cin>>dato1Revista;
+            cin.ignore();
             cout<<"Introduce Mes de Publicacion: "<<std::endl;
-            cin>>dato2;
+            getline(cin,dato2);
             while(aux<100)
             {
                 if(ListaMateriales[aux] == nullptr)
@@ -190,7 +192,8 @@ MaterialBibliografico** funcion_opcion_1(MaterialBibliografico** ListaMateriales
             cin>> opcionfuncion; 
             break;
     }
-};
+    return nullptr;
+}
 
 
 void funcion_opcion_2(MaterialBibliografico** ListaMateriales){
@@ -234,13 +237,13 @@ void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
     cout<<" "<<std::endl;
     cout<<"Ingresa Opcion: "<<std::endl;
     cin>>opcionfuncion;
-
+    cin.ignore();
     switch(opcionfuncion)
     {
         case 1:
             cout<<"---------------"<<std::endl;
             cout<<"Introduce el Nombre: "<<std::endl;
-            cin>>AutorMaterial;
+            getline(cin,AutorMaterial);
             while(aux<100)
             {
                 if(ListaMaterial[aux] != nullptr)
@@ -273,7 +276,7 @@ void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
         case 2:
             cout<<"---------------"<<std::endl;
             cout<<"Introduce el Autor: "<<std::endl;
-            cin>>AutorMaterial;
+            getline(cin,AutorMaterial);
             while(aux<100)
             {
                 if(ListaMaterial[aux] != nullptr)
@@ -330,6 +333,7 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales, vector<Usuario*> 
     cout<<" "<<std::endl;
     cout<<"Ingrese opcion: ";
     cin>> opcionfuncion;
+    cin.ignore();
     string nombreMaterial;
 
     switch(opcionfuncion)
@@ -338,9 +342,9 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales, vector<Usuario*> 
             cout<<" "<<std::endl;
             cout<<"========="<<std::endl;
             cout<<"Ingrese Nombre de Usuario: "<<std::endl;
-            cin>>Nombre;
+            getline(cin,Nombre);
             cout<<"Ingrese ID del Usuario: "<<std::endl;
-            cin>>ID;
+            getline(cin,ID);
 
             Usuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
             if(Usuario != -1)
@@ -371,9 +375,9 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales, vector<Usuario*> 
             cout<<" "<<std::endl;
             cout<<"========="<<std::endl;
             cout<<"Ingrese Nombre de Usuario: "<<std::endl;
-            cin>>Nombre;
+            getline(cin,Nombre);
             cout<<"Ingrese ID del Usuario: "<<std::endl;
-            cin>>ID;
+            getline(cin,ID);
 
             Usuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
             if(Usuario != -1)
@@ -427,6 +431,7 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
     cout<<"4) Salir"<<std::endl;
     cout<<"Ingrese opcion: "<<std::endl;
     cin>> opcionfuncion;
+    cin.ignore();
 
     switch(opcionfuncion)
     {
@@ -434,9 +439,9 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
             cout<<" "<<std::endl;
             cout<<"============="<<std::endl;
             cout<<"Introduce Nombre: "<<std::endl;
-            cin>>Nombre;
+            getline(cin,Nombre);
             cout<<"Introduce ID: "<<std::endl;
-            cin>>ID;
+            getline(cin,ID);
 
             indiceUsuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
             if(indiceUsuario == -1)
@@ -463,9 +468,9 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
             cout<<" "<<std::endl;
             cout<<"============="<<std::endl;
             cout<<"Introduce Nombre: "<<std::endl;
-            cin>>Nombre;
+            getline(cin,Nombre);
             cout<<"Introduce ID: "<<std::endl;
-            cin>>ID;
+            getline(cin,ID);
 
             indiceUsuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
             if(indiceUsuario == -1)
@@ -506,9 +511,9 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
             cout<<" "<<std::endl;
             cout<<"============="<<std::endl;
             cout<<"Introduce Nombre: "<<std::endl;
-            cin>>Nombre;
+            getline(cin,Nombre);
             cout<<"Introduce ID: "<<std::endl;
-            cin>>ID;
+            getline(cin,ID);
 
             indiceUsuario = EncontrarUsuario(ListaUsuario,Nombre,ID);
             if(indiceUsuario == -1)
@@ -614,5 +619,3 @@ int main(){
     Menu(ListaMateriales, ListaUsuario);
     return 0;
 }
-
-
