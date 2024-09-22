@@ -564,6 +564,18 @@ void GuardarMateriales(MaterialBibliografico** ListaMaterial) {
     archivo.close();
 }
 
+void GuardarUsuarios(vector<Usuario*> ListaUsuario)
+{
+    ofstream archivo("usuarios.txt");
+
+    for (int i = 0; i < ListaUsuario.size(); ++i) {
+        if (ListaUsuario[i] != nullptr) {
+            archivo << ListaUsuario[i]->toString() << endl; // Escribe cada material en el archivo
+        }
+    }
+    archivo.close();
+}
+
 
 void Menu(MaterialBibliografico** Lista, vector<Usuario*> ListaUsuario)
 {
@@ -594,6 +606,7 @@ void Menu(MaterialBibliografico** Lista, vector<Usuario*> ListaUsuario)
 
             case 6:
                 EstadoMenu = false;
+                GuardarUsuarios(ListaUsuario);
                 GuardarMateriales(Lista);
                 eliminarTodoObjeto(Lista,ListaUsuario);
                 break;
@@ -621,33 +634,7 @@ vector<std::string> splitPorComillas(string linea)
     return elementos;
 }
 
-vector<Usuario*> LecturaUsuario(vector<Usuario*> ListaUsuario)
-{
-    std::ifstream archivo("biblioteca.txt");
-    if(!archivo.is_open())
-    {
-        cerr << "Error al abrir el archivo" << std::endl;
-    }
-    string linea;
 
-    
-    while(true)
-    {
-        getline(archivo, linea);
-        if (linea.empty()) {
-            break;
-        }
-        vector<string> elementos = splitPorComillas(linea);
-
-        string Nombre = elementos[0];
-        string ID = elementos[1];
-
-        Usuario* NuevoUsuario = new Usuario(Nombre,ID);
-        ListaUsuario.push_back(NuevoUsuario);
-    }
-    return ListaUsuario;
-
-}
 
 MaterialBibliografico** LecturaArch(MaterialBibliografico** ListaMaterial)
 {
@@ -711,12 +698,57 @@ MaterialBibliografico** LecturaArch(MaterialBibliografico** ListaMaterial)
     return ListaMaterial;
 }
 
+vector<Usuario*> LecturaUsuario(vector<Usuario*> ListaUsuario, MaterialBibliografico** ListaMaterial) {
+    std::ifstream archivo("usuarios.txt");
+    if (!archivo.is_open()) {
+        cerr << "Error al abrir el archivo" << std::endl;
+        return ListaUsuario;
+    }
+
+    string linea;
+
+    while (getline(archivo, linea)) {
+        if (linea.empty()) {
+            continue; // Saltar líneas vacías
+        }
+
+        // Dividir la línea por comillas (o el delimitador que utilices)
+        vector<string> elementos = splitPorComillas(linea);
+        string Nombre = elementos[0]; // Nombre del usuario
+        string ID = elementos[1]; // ID del usuario
+
+        // Crear un nuevo usuario con el nombre y el ID
+        Usuario* NuevoUsuario = new Usuario(Nombre, ID);
+
+        // Si el usuario tiene materiales prestados
+        if (elementos.size() > 2) {
+            // Iterar sobre los materiales en la línea
+            for (size_t a = 2; a < elementos.size(); a++) {
+                // Buscar el material en la lista de materiales
+                for (int aux = 0; aux < 100; aux++) {
+                    if (ListaMaterial[aux] != nullptr && ListaMaterial[aux]->getNombre() == elementos[a]) {
+                        // Asignar el material al usuario
+                        NuevoUsuario->setLista(ListaMaterial[aux]);
+                        break; // Salir del bucle una vez encontrado el material
+                    }
+                }
+            }
+        }
+
+        // Agregar el usuario con sus materiales prestados a la lista de usuarios
+        ListaUsuario.push_back(NuevoUsuario);
+    }
+
+    return ListaUsuario; // Retornar la lista de usuarios actualizada
+}
+
+
 
 int main(){
     MaterialBibliografico* ListaMateriales[100] = {nullptr};
     vector<Usuario *> ListaUsuario;
-    vector<Usuario*> NuevosUsuarios = LecturaUsuario(ListaUsuario);
     MaterialBibliografico** NuevosMateriales = LecturaArch(ListaMateriales);
+    vector<Usuario*> NuevosUsuarios = LecturaUsuario(ListaUsuario,NuevosMateriales);
     Menu(NuevosMateriales, NuevosUsuarios);
     return 0;
 }
