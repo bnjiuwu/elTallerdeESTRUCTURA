@@ -1,9 +1,27 @@
 #include "Usuario.h"
 
+
 Usuario::Usuario(string Nombre, string id)
 {
-    this ->Nombre = Nombre;
-    this ->id = id;
+    this->Nombre = Nombre;
+    this->id = id;
+    for (int i = 0; i < 5; i++) {
+        this->MaterialesPrestados[i] = nullptr;
+    }
+}
+
+void Usuario::setLista(MaterialBibliografico* Material)
+{
+    int aux = 0;
+    while(aux<5)
+    {
+        if(this->MaterialesPrestados[aux] == nullptr)
+        {
+            this->MaterialesPrestados[aux] = Material;
+            break;
+        }
+        aux++;
+    }
 }
 
 string Usuario::getNombre()
@@ -16,13 +34,26 @@ string Usuario::getId()
     return this->id;
 }
 
+string Usuario::toString()
+{
+    int aux = 0;
+    string mensaje = this->Nombre+","+this->id;
+    if(this->MaterialesPrestados[aux] != nullptr)
+    {
+        mensaje += ","+this->MaterialesPrestados[aux]->getNombre();
+    }
+    aux++;
+    
+    return mensaje;
+}
+
 void Usuario::prestarMaterial(MaterialBibliografico* material)
 {
     cout<<" "<<std::endl;
     int aux = 0;
     while(aux<5)
     {
-        if(this->MaterialesPrestados[aux] == 0 && material->getEstado() == "No Prestado")
+        if(this->MaterialesPrestados[aux] == nullptr && material->getEstado() == "No Prestado")
         {
             cout<<"============="<<std::endl;
             cout<<"Se ha guardado el Material"<<std::endl;
@@ -50,7 +81,7 @@ void Usuario::devolverMaterial(MaterialBibliografico* material)
     int aux = 0;
     while(aux<5)
     {
-        if(this->MaterialesPrestados[aux] == 0 && material->getEstado() == "No Prestado")
+        if(this->MaterialesPrestados[aux] == nullptr && material->getEstado() == "No Prestado")
         {
             cout<<"============="<<std::endl;
             cout<<"El material no ha sido Prestado"<<std::endl;
@@ -81,11 +112,18 @@ int Usuario::mostrarMaterialesPrestados()
     int contador = 0;
     while(aux<5)
     {
-        if(this->MaterialesPrestados[aux] != nullptr)
+        if(this->MaterialesPrestados[aux] != 0)
         {
             MaterialBibliografico* objeto = this->MaterialesPrestados[aux];
-            objeto->MostrarInfo();
-            contador += 1;
+            if (objeto != nullptr)
+            {
+                objeto->MostrarInfo();
+                contador += 1;
+            }
+            else
+            {
+                cout << "Error: Material no inicializado correctamente en la posición " << aux << endl;
+            }
         }
         aux += 1;
     }  
