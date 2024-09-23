@@ -5,7 +5,15 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <cctype>
 
+std::string toLowerString(const std::string &str) {
+    std::string resultado = str;
+    for (char &c : resultado) {
+        c = tolower(static_cast<unsigned char>(c));  // Convertir cada carácter a minúscula
+    }
+    return resultado;
+}
 
 MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliografico** ListaMateriales, int aux)
 {
@@ -17,7 +25,7 @@ MaterialBibliografico* EncontrarMaterial(string nombreMaterial, MaterialBibliogr
     {
         if(ListaMateriales[aux] != nullptr)
         {
-            if(nombreMaterial == ListaMateriales[aux]->getNombre())
+            if(toLowerString(nombreMaterial) == toLowerString(ListaMateriales[aux]->getNombre()))
             {
                 return ListaMateriales[aux];
             }
@@ -249,7 +257,7 @@ void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
             {
                 if(ListaMaterial[aux] != nullptr)
                 {
-                    if(AutorMaterial == ListaMaterial[aux]->getNombre())
+                    if(toLowerString(AutorMaterial) == toLowerString(ListaMaterial[aux]->getNombre()))
                     {
                         cout<<" "<<std::endl;
                         cout<<"==========="<<std::endl;
@@ -282,7 +290,7 @@ void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
             {
                 if(ListaMaterial[aux] != nullptr)
                 {
-                    if(AutorMaterial == ListaMaterial[aux]->getAutor())
+                    if(toLowerString(AutorMaterial) == toLowerString(ListaMaterial[aux]->getAutor()))
                     {
                         cout<<" "<<std::endl;
                         cout<<"==========="<<std::endl;
@@ -752,3 +760,4 @@ int main(){
     Menu(NuevosMateriales, NuevosUsuarios);
     return 0;
 }
+
