@@ -717,25 +717,21 @@ vector<Usuario*> LecturaUsuario(vector<Usuario*> ListaUsuario, MaterialBibliogra
 
     while (getline(archivo, linea)) {
         if (linea.empty()) {
-            continue; // Saltar líneas vacías
+            continue; 
         }
 
-        // Dividir la línea por comillas (o el delimitador que utilices)
         vector<string> elementos = splitPorComillas(linea);
-        string Nombre = elementos[0]; // Nombre del usuario
-        string ID = elementos[1]; // ID del usuario
-
-        // Crear un nuevo usuario con el nombre y el ID
+        string Nombre = elementos[0]; 
+        string ID = elementos[1];
+        
+       
         Usuario* NuevoUsuario = new Usuario(Nombre, ID);
 
-        // Si el usuario tiene materiales prestados
+      
         if (elementos.size() > 2) {
-            // Iterar sobre los materiales en la línea
             for (size_t a = 2; a < elementos.size(); a++) {
-                // Buscar el material en la lista de materiales
                 for (int aux = 0; aux < 100; aux++) {
                     if (ListaMaterial[aux] != nullptr && ListaMaterial[aux]->getNombre() == elementos[a]) {
-                        // Asignar el material al usuario
                         NuevoUsuario->setLista(ListaMaterial[aux]);
                         break; // Salir del bucle una vez encontrado el material
                     }
@@ -743,7 +739,6 @@ vector<Usuario*> LecturaUsuario(vector<Usuario*> ListaUsuario, MaterialBibliogra
             }
         }
 
-        // Agregar el usuario con sus materiales prestados a la lista de usuarios
         ListaUsuario.push_back(NuevoUsuario);
     }
 
