@@ -1,7 +1,7 @@
-#include "MaterialBibliografico.cpp"
-#include "libro.cpp"
-#include "Usuario.cpp"
-#include "revista.cpp"
+#include "MaterialBibliografico.h"
+#include "libro.h"
+#include "Usuario.h"
+#include "revista.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
