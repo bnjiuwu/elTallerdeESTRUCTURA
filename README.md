@@ -6,6 +6,10 @@ Pasos para compliacion (en la terminal):
 
 
 1- cd Taller1-Estructura
+
+
 2- g++ -std=c++11 main.cpp MaterialBibliografico.cpp Usuario.cpp libro.cpp revista.cpp -o programa
+
+
 3- ./programa
 
