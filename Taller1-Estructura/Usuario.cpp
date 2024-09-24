@@ -37,12 +37,13 @@ string Usuario::getId()
 string Usuario::toString()
 {
     int aux = 0;
-    string mensaje = this->Nombre+","+this->id;
-    if(this->MaterialesPrestados[aux] != nullptr)
-    {
-        mensaje += ","+this->MaterialesPrestados[aux]->getNombre();
-    }
+    string mensaje = this->Nombre + "," + this->id;
+
+    while (this->MaterialesPrestados[aux] != nullptr && aux <5 ) {
+        mensaje += "," + this->MaterialesPrestados[aux]->getNombre();
     aux++;
+    }
+
     
     return mensaje;
 }
