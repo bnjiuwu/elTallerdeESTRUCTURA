@@ -1,5 +1,6 @@
-Libro,Las Aventras De Vicente Octavio,Diego Ravanal Vanzi,0-306-40615-2,Prestado,12-02-2034,Octavio
-Libro,Mitos y Leyendas del server,Benjamin Jesus Cristo,978-0-306-40615-7,No Prestado,06-12-1830,SE FLITRO EL CHAT
-Revista,Puro chamuyo,Eneo Monsalve,1-86197-876-9,No Prestado,23,Octubre
-Revista,Playboy,J Honores,978-1-86197-876-9,Prestado,46,Septiembre
+Libro,Hanzel y Gretel,Hermanos Grimm ,0-306-40615-2,Prestado,12-02-2034,"Hansel y Gretel" es un cuento clásico de los hermanos Grimm. Narra la historia de dos hermanos, Hansel y Gretel, que son abandonados en el bosque por sus padres debido a la pobreza.
+Libro,Fundamentos de las Variables Aleatorias,Carlos Monardez,978-0-306-40615-7,No Prestado,06-12-1830,En el estudio de la probabilidad, las variables aleatorias son una herramienta fundamental para modelar fenómenos inciertos y describir situaciones en las que los resultados no pueden predecirse con certeza.
+Revista,National Geographic,Varios,0027-9358,No Prestado,23,Octubre
+Revista,Time,Samuel Reimers,0040-781X,Prestado,46,Septiembre
+
 
