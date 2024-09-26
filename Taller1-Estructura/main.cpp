@@ -6,6 +6,7 @@
 #include <sstream>
 #include <vector>
 #include <cctype>
+#include <unistd.h> 
 
 std::string toLowerString(const std::string &str) {
     std::string resultado = str;
@@ -153,6 +154,7 @@ MaterialBibliografico** funcion_opcion_1(MaterialBibliografico** ListaMateriales
                     cout<<""<<std::endl;
                     cout<<"Se ha guardado el Libro"<<std::endl;
                     cout<<""<<std::endl;
+                    sleep(3);
                     funcion_opcion_1(ListaMateriales);
                     break;
                 }
@@ -184,6 +186,7 @@ MaterialBibliografico** funcion_opcion_1(MaterialBibliografico** ListaMateriales
                     cout<<""<<std::endl;
                     cout<<"Se ha guardado la Revista"<<std::endl;
                     cout<<""<<std::endl;
+                    sleep(3);
                     funcion_opcion_1(ListaMateriales);
                     break;
                 }
@@ -218,11 +221,13 @@ void funcion_opcion_2(MaterialBibliografico** ListaMateriales){
         }
         aux++;
     }
+    sleep(3);
     if(contador == 0)
     {
         cout<<""<<std::endl;
         cout<<"La Biblioteca se encuentra vacia de Materiales"<<std::endl;
         cout<<""<<std::endl;
+        sleep(3);
         return;
     }
     return;
@@ -273,12 +278,14 @@ void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
                     cout<<"================="<<std::endl;
                     cout<<" "<<std::endl;
                     cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    sleep(3);
                     break;
                     funcion_opcion_3(ListaMaterial);
                     
                 }
                 aux++;
             }
+            sleep(3);
             funcion_opcion_3(ListaMaterial);
             break;
         
@@ -306,12 +313,14 @@ void funcion_opcion_3(MaterialBibliografico** ListaMaterial){
                     cout<<"================="<<std::endl;
                     cout<<" "<<std::endl;
                     cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    sleep(3);
                     break;
                     funcion_opcion_3(ListaMaterial);
                     
                 }
                 aux++;
             }
+            sleep(3);
             funcion_opcion_3(ListaMaterial);
             break;
 
@@ -364,9 +373,11 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales, vector<Usuario*> 
                     cout<<""<<std::endl;
                     cout<<"============="<<std::endl;
                     cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    sleep(3);
                     funcion_opcion_4(ListaMateriales,ListaUsuario);
                 }
                 ListaUsuario[Usuario]->prestarMaterial(Material);
+                sleep(3);
                 funcion_opcion_4(ListaMateriales,ListaUsuario);
             }
             else
@@ -375,6 +386,7 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales, vector<Usuario*> 
                 cout<<"================"<<std::endl;
                 cout<<""<<std::endl;
                 cout<<"El Usuario no existe"<<std::endl;
+                sleep(3);
                 funcion_opcion_4(ListaMateriales,ListaUsuario);
             }
             break;
@@ -397,9 +409,11 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales, vector<Usuario*> 
                     cout<<""<<std::endl;
                     cout<<"============="<<std::endl;
                     cout<<"El material no se encuentra en la Biblioteca"<<std::endl;
+                    sleep(3);
                     funcion_opcion_4(ListaMateriales,ListaUsuario);
                 }
                 ListaUsuario[Usuario]->devolverMaterial(Material);
+                sleep(3);
                 funcion_opcion_4(ListaMateriales,ListaUsuario);
             }
             else
@@ -408,6 +422,7 @@ void funcion_opcion_4(MaterialBibliografico** ListaMateriales, vector<Usuario*> 
                 cout<<"================"<<std::endl;
                 cout<<""<<std::endl;
                 cout<<"El Usuario no existe"<<std::endl;
+                sleep(3);
                 funcion_opcion_4(ListaMateriales,ListaUsuario);
             }
             break;
@@ -461,6 +476,7 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
                 cout<<"================"<<std::endl;
                 cout<<""<<std::endl;
                 cout<<"Usuario creado con exito"<<std::endl;
+                sleep(3);
                 funcion_opcion_5(ListaUsuario);
             }
             else
@@ -469,6 +485,7 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
                 cout<<"================"<<std::endl;
                 cout<<""<<std::endl;
                 cout<<"El Usuario ya existe"<<std::endl;
+                sleep(3);
                 funcion_opcion_5(ListaUsuario);
             }
             break;
@@ -488,6 +505,7 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
                 cout<<"================"<<std::endl;
                 cout<<""<<std::endl;
                 cout<<"El Usuario no existe"<<std::endl;
+                sleep(3);
                 funcion_opcion_5(ListaUsuario);
             }
             else
@@ -501,6 +519,7 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
                     cout<<"================"<<std::endl;
                     cout<<""<<std::endl;
                     cout<<"Usuario eliminado"<<std::endl;
+                    sleep(3);
                     funcion_opcion_5(ListaUsuario);
                 }
                 else
@@ -509,6 +528,7 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
                     cout<<"================"<<std::endl;
                     cout<<""<<std::endl;
                     cout<<"El Usuario debe devolver Materiales antes de ser eliminado"<<std::endl;
+                    sleep(3);
                     funcion_opcion_5(ListaUsuario);
                 }
 
@@ -531,6 +551,7 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
                 cout<<"================"<<std::endl;
                 cout<<""<<std::endl;
                 cout<<"El Usuario no existe"<<std::endl;
+                sleep(3);
                 funcion_opcion_5(ListaUsuario);
             }
             else
@@ -541,8 +562,9 @@ vector<Usuario*> funcion_opcion_5(vector<Usuario*> ListaUsuario){
                 cout<<"Nombre: "<<usuario->getNombre()<<std::endl;
                 cout<<"ID: "<<usuario->getId()<<std::endl;
                 cout<<""<<std::endl;
-                cout<<"Lista Materiales"<<std::endl;
+                cout<<"Lista Materiales: "<<std::endl;
                 usuario->mostrarMaterialesPrestados();
+                sleep(3);
                 funcion_opcion_5(ListaUsuario);
             
             }
