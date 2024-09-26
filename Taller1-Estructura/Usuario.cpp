@@ -119,6 +119,7 @@ int Usuario::mostrarMaterialesPrestados()
             if (objeto != nullptr)
             {
                 objeto->MostrarInfo();
+                cout<<" "<<std::endl;
                 contador += 1;
             }
             else
