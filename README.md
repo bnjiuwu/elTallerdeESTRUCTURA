@@ -26,5 +26,7 @@ Revista2: {nombre:"Time";autor:"Samuel Reimers";isbn:"0040-781X";estado:"Prestad
 Usuarios
 
 Usuario1: {nombre:"Jose";id:"288dued83ue8"}
+
 Usuario2: {nombre:"Pablo";id:"8idjdje8asd";material1:"Hanzel y Gretel"}
+
 Usuario3: {nombre:"Sofia";id:"39djd8ejd9e";material1:"Time"}
